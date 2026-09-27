@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Security Awareness Demo</title>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f2f3f5;
+    margin:0;
+    padding:30px;
+}
+
+.card{
+    max-width:400px;
+    margin:50px auto;
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 5px 25px #0002;
+}
+
+input,button{
+    width:100%;
+    box-sizing:border-box;
+    padding:13px;
+    margin-top:10px;
+    border-radius:9px;
+}
+
+input{
+    border:1px solid #ccc;
+}
+
+button{
+    border:0;
+    background:#111;
+    color:white;
+    font-weight:bold;
+}
+
+#login{
+    display:none;
+}
+
+#result{
+    display:none;
+    margin-top:20px;
+    padding:15px;
+    background:#fff3cd;
+    border-radius:10px;
+}
+
+.small{
+    color:#777;
+    font-size:13px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>🎬 شاهد الفيديو</h2>
+
+<p>اضغط لمشاهدة الفيديو.</p>
+
+<button onclick="startDemo()">
+▶ مشاهدة الفيديو
+</button>
+
+<div id="login">
+
+<h3>تسجيل الدخول</h3>
+
+<p>
+يجب تسجيل الدخول لمشاهدة الفيديو.
+</p>
+
+<input
+id="name"
+placeholder="اسم تجريبي">
+
+<input
+id="email"
+placeholder="البريد الإلكتروني">
+
+<input
+id="password"
+type="password"
+placeholder="كلمة مرور تجريبية فقط">
+
+<button onclick="finishDemo()">
+تسجيل الدخول
+</button>
+
+<p class="small">
+⚠️ هذه صفحة تدريبية. لا تستخدم كلمة مرور حقيقية.
+</p>
+
+</div>
+
+<div id="result"></div>
+
+</div>
+
+
+<script>
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbwtd0GwyirrVsMupI8lTRFCR_vd9WYMKQr7vGLWlSv-jHcRIULCVvZ7zXbhgrbBfTrg/exec";
+
+
+function sendResult(action){
+
+    const name =
+    document.getElementById("name")?.value || "";
+
+    const email =
+    document.getElementById("email")?.value || "";
+
+    const data = {
+
+        name:name,
+
+        email:email,
+
+        action:action,
+
+        detected:"No"
+
+    };
+
+    fetch(SCRIPT_URL, {
+
+        method:"POST",
+
+        mode:"no-cors",
+
+        headers:{
+            "Content-Type":"text/plain"
+        },
+
+        body:JSON.stringify(data)
+
+    });
+
+}
+
+
+function startDemo(){
+
+    document.getElementById("login")
+    .style.display="block";
+
+}
+
+
+function finishDemo(){
+
+    sendResult("submitted_demo_form");
+
+    document.getElementById("password")
+    .value="";
+
+
+    document.getElementById("result")
+    .style.display="block";
+
+
+    document.getElementById("result")
+    .innerHTML=
+
+    "<b>🛑 كانت هذه محاكاة تعليمية.</b><br><br>" +
+
+    "تم تسجيل نتيجة الاختبار فقط.<br>" +
+
+    "لم يتم إرسال أو تخزين كلمة المرور.<br><br>" +
+
+    "علامات الخطر: رابط غير متوقع وطلب تسجيل الدخول لمشاهدة فيديو.";
+
+}
+
+</script>
+
+</body>
+</html>
